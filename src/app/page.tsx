@@ -17,27 +17,27 @@ export default async function HomePage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-blue-50 via-sky-50 to-blue-100 pt-32 pb-20 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 flex items-center gap-12">
+      <section className="bg-gradient-to-br from-blue-50 via-sky-50 to-blue-100 pt-24 sm:pt-32 pb-12 sm:pb-20 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center gap-8 sm:gap-12">
           {/* Left: text + CTAs */}
           <div className="flex-1 min-w-0">
-            <h1 className="text-6xl font-black text-slate-900 leading-[1.1] mb-6 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] mb-4 sm:mb-6 tracking-tight">
               Memorable Event Experiences<br />
               start here<br />
             </h1>
-            <p className="text-base text-gray-600 mb-8 leading-relaxed max-w-md">
-              Create memorable events as a host, or discover memorable ones as an attendee.<br />
+            <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-md">
+              Create memorable events as a host, or discover amazing ones as an attendee.<br />
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
-                href="https://workflowafrica.com/login"
-                className="bg-slate-900 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-slate-800 transition-colors"
+                href="/login"
+                className="bg-slate-900 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-slate-800 transition-colors"
               >
                 Create Event
               </Link>
               <Link
-                href="https://workflowafrica.com/events"
-                className="border border-slate-800 text-slate-900 px-6 py-3 rounded-full text-sm font-semibold hover:bg-white/60 transition-colors"
+                href="/events"
+                className="border border-slate-800 text-slate-900 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-white/60 transition-colors"
               >
                 Discover Events
               </Link>
@@ -95,15 +95,15 @@ export default async function HomePage() {
 
       {/* Upcoming Events */}
       {events && events.length > 0 && (
-        <section className="py-20">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="flex items-center justify-between mb-10">
-              <h2 className="text-3xl font-bold text-gray-900">Upcoming Events</h2>
+        <section className="py-12 sm:py-20">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="flex items-center justify-between mb-6 sm:mb-10">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Upcoming Events</h2>
               <Link href="/events" className="text-slate-900 hover:text-slate-700 font-medium text-sm underline underline-offset-2">
                 View all →
               </Link>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {events.map((event: Pick<Event, 'id' | 'name' | 'date' | 'venue' | 'organizer' | 'status'>) => (
                 <Link key={event.id} href={`/events/${event.id}`}>
                   <div className="card p-6 hover:border-slate-300 hover:shadow-md transition-all h-full rounded-2xl">

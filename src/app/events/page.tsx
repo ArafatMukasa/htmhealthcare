@@ -14,15 +14,15 @@ export default async function EventsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center gap-3">
-          <Link href="/" className="font-bold text-indigo-600">Workflow Africa</Link>
+        <div className="max-w-6xl mx-auto px-4 py-3 sm:py-4 flex items-center gap-2 sm:gap-3">
+          <Link href="/" className="font-bold text-indigo-600 text-sm sm:text-base">Workflow Africa</Link>
           <span className="text-gray-300">/</span>
           <span className="text-gray-600 text-sm">Events</span>
         </div>
       </nav>
 
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">All Events</h1>
+      <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">All Events</h1>
 
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-lg mb-6 text-sm">
@@ -36,7 +36,7 @@ export default async function EventsPage() {
           </div>
         )}
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {events?.map((event: Event) => (
             <Link key={event.id} href={`/events/${event.id}`}>
               <div className="card p-6 hover:border-indigo-300 hover:shadow-md transition-all h-full flex flex-col">

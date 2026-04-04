@@ -43,19 +43,19 @@ export default async function EventDetailPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-3 text-sm">
-          <Link href="/" className="font-bold text-indigo-600">Workflow Africa</Link>
+        <div className="max-w-4xl mx-auto px-4 py-3 sm:py-4 flex items-center gap-2 text-sm overflow-x-auto">
+          <Link href="/" className="font-bold text-indigo-600 whitespace-nowrap">Workflow Africa</Link>
           <span className="text-gray-300">/</span>
-          <Link href="/events" className="text-gray-600 hover:text-indigo-600">Events</Link>
+          <Link href="/events" className="text-gray-600 hover:text-indigo-600 whitespace-nowrap">Events</Link>
           <span className="text-gray-300">/</span>
-          <span className="text-gray-600 truncate max-w-xs">{e.name}</span>
+          <span className="text-gray-600 truncate max-w-[140px] sm:max-w-xs">{e.name}</span>
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto px-4 py-12 grid md:grid-cols-5 gap-8">
+      <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 grid md:grid-cols-5 gap-6 sm:gap-8">
         {/* Event Details */}
         <div className="md:col-span-3">
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-3 sm:mb-4">
             <span className={`text-xs px-2 py-1 rounded-full ${
               e.status === 'published' ? 'bg-green-100 text-green-700' :
               e.status === 'draft' ? 'bg-gray-100 text-gray-600' :
@@ -63,7 +63,7 @@ export default async function EventDetailPage({ params }: Props) {
             }`}>{e.status}</span>
           </div>
 
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">{e.name}</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">{e.name}</h1>
 
           {e.description && (
             <p className="text-gray-600 mb-6 leading-relaxed">{e.description}</p>

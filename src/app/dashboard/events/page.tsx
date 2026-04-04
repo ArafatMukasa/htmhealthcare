@@ -13,13 +13,13 @@ export default async function DashboardEventsPage() {
     .order('date', { ascending: false })
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-4 sm:p-8">
+      <div className="flex items-center justify-between mb-6 sm:mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Events</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Events</h1>
           <p className="text-gray-500 mt-1 text-sm">{events?.length ?? 0} total</p>
         </div>
-        <Link href="/dashboard/events/new" className="btn-primary text-sm">
+        <Link href="/dashboard/events/new" className="btn-primary text-sm whitespace-nowrap">
           + New Event
         </Link>
       </div>
