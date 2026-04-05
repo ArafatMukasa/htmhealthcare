@@ -60,10 +60,10 @@ export default function Navbar() {
               Discover Events
             </Link>
 
-            {/* "Create Event" — always visible at every screen size */}
+            {/* "Create Event" — visible from sm (640px+) only */}
             <Link
               href="/login"
-              className="bg-slate-900 text-white px-3 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium hover:bg-slate-800 transition-colors whitespace-nowrap"
+              className="hidden sm:inline-flex bg-slate-900 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-slate-800 transition-colors whitespace-nowrap"
             >
               Create Event
             </Link>
@@ -100,6 +100,13 @@ export default function Navbar() {
             onClick={close}
           >
             Discover Events
+          </Link>
+          <Link
+            href="/login"
+            className="bg-slate-900 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-slate-800 transition-colors text-center"
+            onClick={close}
+          >
+            Create Event
           </Link>
         </div>
       )}
