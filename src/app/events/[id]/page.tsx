@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import RSVPForm from './RSVPForm'
 import type { Event, Gender, AgeRange, DisabilityState, County, SubCounty } from '@/lib/types'
 
@@ -8,7 +8,7 @@ interface Props { params: Promise<{ id: string }> }
 
 export async function generateMetadata({ params }: Props) {
   const { id } = await params
-  const supabase = await createClient()
+  const supabase = createServiceClient()
   const { data: event } = await supabase.from('events').select('name, description').eq('id', id).single()
   return {
     title: event ? `${event.name} — Workflow Africa` : 'Event — Workflow Africa',
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function EventDetailPage({ params }: Props) {
   const { id } = await params
-  const supabase = await createClient()
+  const supabase = createServiceClient()
 
   const [
     { data: event },
