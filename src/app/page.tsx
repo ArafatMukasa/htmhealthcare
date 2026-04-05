@@ -18,69 +18,77 @@ export default async function HomePage() {
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-blue-50 via-sky-50 to-blue-100 pt-24 sm:pt-32 pb-12 sm:pb-20 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center gap-8 sm:gap-12">
-          {/* Left: text + CTAs */}
-          <div className="flex-1 min-w-0">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] mb-4 sm:mb-6 tracking-tight">
-              Memorable Event Experiences<br />
-              start here<br />
-            </h1>
-            <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-md">
-              Create memorable events as a host, or discover amazing ones as an attendee.<br />
-            </p>
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-              <Link
-                href="/login"
-                className="bg-slate-900 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-slate-800 transition-colors"
-              >
-                Create Event
-              </Link>
-              <Link
-                href="/events"
-                className="border border-slate-800 text-slate-900 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-white/60 transition-colors"
-              >
-                Discover Events
-              </Link>
-            </div>
-          </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 lg:gap-16 lg:items-center">
 
-          {/* Right: phone mockup */}
-          <div className="hidden md:flex flex-shrink-0 justify-center items-center">
-            <div className="relative">
-              <div className="w-56 h-[460px] bg-slate-900 rounded-[42px] p-2 shadow-2xl">
-                <div className="w-full h-full bg-white rounded-[34px] overflow-hidden relative">
-                  {/* Notch */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-2xl z-10" />
-                  {/* App content */}
-                  <div className="pt-7 px-4 pb-4 h-full flex flex-col">
-                    {/* City skyline graphic */}
-                    <div className="w-full h-28 rounded-xl mb-4 overflow-hidden bg-gradient-to-br from-sky-400 via-orange-300 to-pink-400 flex items-end justify-center gap-1 px-3 pb-2">
-                      {[20, 36, 28, 44, 24, 32, 20, 38].map((h, i) => (
-                        <div
-                          key={i}
-                          className="rounded-t-sm flex-1"
-                          style={{
-                            height: `${h * 1.5}px`,
-                            backgroundColor: ['#6366f1','#f97316','#ec4899','#8b5cf6','#14b8a6','#f59e0b','#3b82f6','#ef4444'][i % 8],
-                            opacity: 0.85,
-                          }}
-                        />
-                      ))}
-                    </div>
-                    {/* Form card */}
-                    <div className="bg-gray-50 rounded-xl p-3 flex-1 border border-gray-100">
-                      <div className="font-semibold text-xs text-gray-800 mb-3">Tech Summit Lagos</div>
-                      <div className="space-y-2">
-                        <div>
-                          <div className="text-[9px] text-gray-500 mb-0.5">Full name</div>
-                          <div className="bg-white border border-gray-200 rounded-md px-2 py-1.5 text-[9px] text-gray-400">Your name here</div>
-                        </div>
-                        <div>
-                          <div className="text-[9px] text-gray-500 mb-0.5">Email</div>
-                          <div className="bg-white border border-gray-200 rounded-md px-2 py-1.5 text-[9px] text-gray-400">Add email address</div>
-                        </div>
-                        <div className="mt-3 bg-orange-500 rounded-md px-2 py-1.5 text-center text-[9px] font-semibold text-white">
-                          Register
+            {/* Left (desktop) / Top (mobile): text + CTAs */}
+            <div className="text-center lg:text-left">
+              <h1
+                className="font-black text-slate-900 leading-[1.1] mb-4 sm:mb-6 tracking-tight"
+                style={{ fontSize: 'clamp(2.25rem, 5vw, 3.75rem)' }}
+              >
+                Memorable Event Experiences<br />
+                start here
+              </h1>
+              <p className="text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-md mx-auto lg:mx-0"
+                style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)' }}
+              >
+                Create memorable events as a host, or discover amazing ones as an attendee.
+              </p>
+              <div className="flex flex-wrap justify-center lg:justify-start items-center gap-3 sm:gap-4">
+                <Link
+                  href="/login"
+                  className="bg-slate-900 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-slate-800 transition-colors"
+                >
+                  Create Event
+                </Link>
+                <Link
+                  href="/events"
+                  className="border border-slate-800 text-slate-900 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-white/60 transition-colors"
+                >
+                  Discover Events
+                </Link>
+              </div>
+            </div>
+
+            {/* Right (desktop) / Bottom (mobile): phone mockup */}
+            <div className="flex justify-center items-center mt-12 lg:mt-0">
+              <div className="relative">
+                <div className="w-56 h-[460px] bg-slate-900 rounded-[42px] p-2 shadow-2xl">
+                  <div className="w-full h-full bg-white rounded-[34px] overflow-hidden relative">
+                    {/* Notch */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-2xl z-10" />
+                    {/* App content */}
+                    <div className="pt-7 px-4 pb-4 h-full flex flex-col">
+                      {/* City skyline graphic */}
+                      <div className="w-full h-28 rounded-xl mb-4 overflow-hidden bg-gradient-to-br from-sky-400 via-orange-300 to-pink-400 flex items-end justify-center gap-1 px-3 pb-2">
+                        {[20, 36, 28, 44, 24, 32, 20, 38].map((h, i) => (
+                          <div
+                            key={i}
+                            className="rounded-t-sm flex-1"
+                            style={{
+                              height: `${h * 1.5}px`,
+                              backgroundColor: ['#6366f1','#f97316','#ec4899','#8b5cf6','#14b8a6','#f59e0b','#3b82f6','#ef4444'][i % 8],
+                              opacity: 0.85,
+                            }}
+                          />
+                        ))}
+                      </div>
+                      {/* Form card */}
+                      <div className="bg-gray-50 rounded-xl p-3 flex-1 border border-gray-100">
+                        <div className="font-semibold text-xs text-gray-800 mb-3">Tech Summit Lagos</div>
+                        <div className="space-y-2">
+                          <div>
+                            <div className="text-[9px] text-gray-500 mb-0.5">Full name</div>
+                            <div className="bg-white border border-gray-200 rounded-md px-2 py-1.5 text-[9px] text-gray-400">Your name here</div>
+                          </div>
+                          <div>
+                            <div className="text-[9px] text-gray-500 mb-0.5">Email</div>
+                            <div className="bg-white border border-gray-200 rounded-md px-2 py-1.5 text-[9px] text-gray-400">Add email address</div>
+                          </div>
+                          <div className="mt-3 bg-orange-500 rounded-md px-2 py-1.5 text-center text-[9px] font-semibold text-white">
+                            Register
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -88,6 +96,7 @@ export default async function HomePage() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
