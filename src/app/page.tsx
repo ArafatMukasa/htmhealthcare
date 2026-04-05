@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import type { Event } from '@/lib/types'
+import Navbar from './Navbar'
 
 export default async function HomePage() {
   const supabase = await createClient()
@@ -14,29 +15,52 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Nav */}
-      <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <span className="font-bold text-xl text-indigo-600">Workflow Africa</span>
-          <div className="flex items-center gap-6">
-            <Link href="/events" className="text-sm text-gray-600 hover:text-indigo-600 font-medium">Events</Link>
-            <Link href="/login" className="btn-primary text-sm">Admin Login</Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero */}
-      <section className="bg-indigo-600 text-white py-24">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6 leading-tight">
-            Event Management<br />for Africa
-          </h1>
-          <p className="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
-            Register for events, track attendance, and manage your organisation's
-            workflow — all in one place.
-          </p>
-          <Link href="/events" className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 inline-block transition-colors">
-            Browse Events
-          </Link>
+      <section className="bg-indigo-600 text-white py-16 lg:py-24">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 lg:gap-16 items-center">
+
+            {/* Left: text + CTA */}
+            <div className="text-center lg:text-left">
+              <h1 className="text-[clamp(2.25rem,5vw,3.5rem)] font-bold mb-6 leading-tight">
+                Event Management<br />for Africa
+              </h1>
+              <p className="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto lg:mx-0">
+                Register for events, track attendance, and manage your organisation's
+                workflow — all in one place.
+              </p>
+              <div className="flex justify-center lg:justify-start">
+                <Link
+                  href="/events"
+                  className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 inline-block transition-colors"
+                >
+                  Browse Events
+                </Link>
+              </div>
+            </div>
+
+            {/* Right: decorative feature panel (desktop only) */}
+            <div className="hidden lg:flex justify-center">
+              <div className="bg-white/10 rounded-2xl p-8 border border-white/20 shadow-2xl w-full max-w-sm space-y-4">
+                {[
+                  { icon: '📅', title: 'Event Management', desc: 'Create & schedule events' },
+                  { icon: '👥', title: 'Participant Tracking', desc: 'Demographics & attendance' },
+                  { icon: '📱', title: 'Mobile + Web', desc: 'Manage from anywhere' },
+                ].map((f) => (
+                  <div key={f.title} className="flex items-center gap-4 bg-white/10 rounded-xl p-4">
+                    <span className="text-3xl shrink-0" aria-hidden="true">{f.icon}</span>
+                    <div>
+                      <p className="font-semibold text-sm">{f.title}</p>
+                      <p className="text-indigo-200 text-xs mt-0.5">{f.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
