@@ -33,7 +33,7 @@ export default async function HomePage() {
               <p className="text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-md mx-auto lg:mx-0"
                 style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)' }}
               >
-                Create memorable events as a host, or discover amazing ones as an attendee.
+                Create incredible events as a host, or discover memorable ones as an attendee.
               </p>
               <div className="flex flex-wrap justify-center lg:justify-start items-center gap-3 sm:gap-4">
                 <Link
@@ -76,7 +76,7 @@ export default async function HomePage() {
                       </div>
                       {/* Form card */}
                       <div className="bg-gray-50 rounded-xl p-3 flex-1 border border-gray-100">
-                        <div className="font-semibold text-xs text-gray-800 mb-3">Tech Summit Lagos</div>
+                        <div className="font-semibold text-xs text-gray-800 mb-3"> Founders, Operators, & Investors Mixer</div>
                         <div className="space-y-2">
                           <div>
                             <div className="text-[9px] text-gray-500 mb-0.5">Full name</div>
@@ -86,7 +86,7 @@ export default async function HomePage() {
                             <div className="text-[9px] text-gray-500 mb-0.5">Email</div>
                             <div className="bg-white border border-gray-200 rounded-md px-2 py-1.5 text-[9px] text-gray-400">Add email address</div>
                           </div>
-                          <div className="mt-3 bg-orange-500 rounded-md px-2 py-1.5 text-center text-[9px] font-semibold text-white">
+                          <div className="mt-3 bg-slate-900 rounded-md px-2 py-1.5 text-center text-[9px] font-semibold text-white">
                             Register
                           </div>
                         </div>
