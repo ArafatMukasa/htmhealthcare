@@ -61,7 +61,7 @@ export default function About() {
             <div className="bg-slate-900 text-white rounded-2xl p-6">
               <h4 className="font-bold mb-2">September 2024</h4>
               <p className="text-sm">
-                Jury shortlisted us in the network of startups.
+                aha moment leading to the ideation of Workflow.
               </p>
             </div>
 
@@ -69,7 +69,7 @@ export default function About() {
             <div className="bg-slate-900 text-white rounded-2xl p-6">
               <h4 className="font-bold mb-2">February 2025</h4>
               <p className="text-sm">
-                Workflows and founders connected over 1000 attendees to discover remarkable ones.
+                Workflow and its founder graduate from the Pwani Innovation Challenge, a groundbreaking initiative of Swahilipot Hub Foundation, supported by the Ministry of Investments, Trade & Industry, the World Bank Group, Spineberg Limited, and E4Impact Foundation under the KIEP SKIES Initiative.
               </p>
             </div>
 
@@ -77,7 +77,7 @@ export default function About() {
             <div className="bg-slate-900 text-white rounded-2xl p-6">
               <h4 className="font-bold mb-2">April 2026</h4>
               <p className="text-sm">
-                We're laying of the smoked version of Workflow login.
+                Beta testing of the evolved version of Workflow begins.
               </p>
             </div>
           </div>
@@ -87,7 +87,7 @@ export default function About() {
             <div>
               <h3 className="text-lg font-bold text-slate-900 mb-2">2024: The year that changed everything</h3>
               <p>
-                A tiny company called Hoteia quietly became the richest business on the planet because the world had finally woken up to the power of artificial intelligence. Technology was advancing at breakneck speed. Artificial intelligence was transforming industries.
+              A chip company called Nvidia quietly became the richest business on the planet because the world had finally woken up to the power of artificial intelligence. Technology was advancing at breakneck speed. Artificial intelligence was transforming industries.
               </p>
             </div>
 
@@ -97,7 +97,7 @@ export default function About() {
                 Except at the event check-in desk.
               </p>
               <p>
-                As event organizers, we never fell relying on paper-based participant lists to check in attendees. It slowed everything down. Participant lists got lost. A simple name, phone number search would take just take hours scanning through hundreds or people with similar names and other unnecessary friction. Wouldn't it better to have something data that should have already existed digitally.
+                As event organizers, we were still relying on paper-based participant lists to check in attendees. It slowed everything down. Participant lists got lost. A simple name, phone number, or email could become a mystery thanks to someone's unreadable handwriting. And after every event, hours were spent manually entering data that should have already existed digitally.
               </p>
               <p>
                 So we asked ourselves a simple question.
@@ -110,13 +110,13 @@ export default function About() {
                 This question sparked the idea of Workflow — a simple mobile app to digitally check in participants at events by replacing the paper-based participant list.
               </p>
               <p className="mt-3">
-                No tool lists.<br />
-                No manual handwriting.<br />
+                No lost lists.<br />
+                No unreadable handwriting.<br />
                 No guessing games.<br />
-                Just real checks-in and real time data.
+                Just real checks-in and real-time data.
               </p>
               <p className="mt-3">
-                In the process of solving this problem platform, we discovered something bigger. There wasn't just time-less functionality.
+                In the process of solving the check-in problem, we discovered something bigger. Events didn't just have a check-in problem. 
               </p>
             </div>
 
@@ -146,7 +146,7 @@ export default function About() {
       <div className="py-16 px-4 flex flex-col items-center justify-center">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-slate-900 mb-6">
-            Ready to host an incredible event?
+            Create something incredible?
           </h2>
           <Link
             href="/login"

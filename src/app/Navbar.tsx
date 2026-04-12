@@ -45,7 +45,7 @@ export default function Navbar() {
 
           {/* Center nav link — visible from sm (640px+) */}
           <div className="hidden sm:flex items-center gap-6">
-            <Link href="#about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
               About
             </Link>
           </div>
@@ -88,7 +88,7 @@ export default function Navbar() {
       {isOpen && (
         <div className="fixed top-16 left-3 right-3 z-50 bg-white/90 backdrop-blur-md border border-white/50 rounded-2xl shadow-xl px-5 py-4 flex flex-col gap-2 sm:hidden">
           <Link
-            href="#about"
+            href="/about"
             className="text-sm text-gray-600 hover:text-gray-900 font-medium py-2 px-2 rounded-lg hover:bg-gray-50 transition-colors"
             onClick={close}
           >
