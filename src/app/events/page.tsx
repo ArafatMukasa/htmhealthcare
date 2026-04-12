@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import type { Event } from '@/lib/types'
 
-export const metadata = { title: 'Events — Workflow Africa' }
+export const metadata = { title: 'Events — Workflow' }
 
 export default async function EventsPage() {
   const supabase = await createClient()
@@ -15,7 +15,7 @@ export default async function EventsPage() {
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-3 sm:py-4 flex items-center gap-2 sm:gap-3">
-          <Link href="/" className="font-bold text-indigo-600 text-sm sm:text-base">Workflow Africa</Link>
+          <Link href="/" className="font-bold text-slate-900 text-sm sm:text-base">Workflow</Link>
           <span className="text-gray-300">/</span>
           <span className="text-gray-600 text-sm">Events</span>
         </div>

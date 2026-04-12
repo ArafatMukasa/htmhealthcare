@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Workflow Africa',
-  description: 'Professional event management and participant tracking across Africa.',
+  title: 'Workflow',
+  description: 'Memorable Event Experiences Start Here.',
   openGraph: {
-    title: 'Workflow Africa',
-    description: 'Professional event management and participant tracking across Africa.',
+    title: 'Workflow',
+    description: 'Memorable Event Experiences Start Here.',
     url: 'https://workflowafrica.com',
-    siteName: 'Workflow Africa',
+    siteName: 'Workflow',
   },
 }
 

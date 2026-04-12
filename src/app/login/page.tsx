@@ -32,8 +32,8 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="card p-8 w-full max-w-md shadow-sm">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-indigo-600">Workflow Africa</h1>
-          <p className="text-gray-500 mt-1 text-sm">Sign in to your account</p>
+          <h1 className="text-2xl font-bold text-slate-900">Workflow</h1>
+          <p className="text-gray-500 mt-1 text-sm">Sign in to your account to create and manage your events and attendees</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-4">
