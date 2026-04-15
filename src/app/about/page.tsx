@@ -3,10 +3,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
+
 export default function About() {
   return (
     <>
-      {/* Hero Section */}
+      {/*  
+      Hero Section 
       <div className="min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-16">
         <div className="max-w-3xl text-center">
           <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
@@ -18,21 +20,37 @@ export default function About() {
           </p>
         </div>
       </div>
+      */}
+     
+
+
+      {/* New Hero Section */}
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-16">
+        <div className="card p-8 w-full max-w-md shadow-sm">
+          <div className="text-center mb-8">
+            <h1 className="text-2xl text-slate-900">Our Mission</h1>
+            <h2 className="text-2xl font-bold text-slate-900">Workflow was created to make hosting and discovery of events simple and impactful.</h2>
+            <p className="text-gray-500 mt-1 text-sm">Great events have the power to educate, inspire, and connect communities, but the infrastructure behind events — creation, discovery, registration, check-in — had lagged behind. Workflow came into existence to close that gap.</p>
+          </div>
+        </div>
+      </div>
 
       {/* Who We Are Section */}
       <div className="py-16 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16">
             <div>
-              <img
-                src="/about-who-we-are.jpg"
-                alt="Who we are"
+              <Image
+                src="/about-who-we-are.png"
+                alt="Workflow product image loading"
                 className="rounded-lg w-full h-auto"
+                width={600} 
+                height={400}
               />
             </div>
             <div>
               <h2 className="text-2xl font-bold text-slate-900 mb-3">
-                Who we are
+                About Workflow
               </h2>
               <h3 className="text-lg font-semibold text-slate-900 mb-3">
                 A refreshingly different and better events platform.
@@ -51,7 +69,7 @@ export default function About() {
           <h2 className="text-2xl font-bold text-slate-900 mb-8">
             Origin story
           </h2>
-          <p className="text-gray-600 mb-8 max-w-2xl">
+          <p className="text-gray-600 font-bold mb-8 max-w-2xl">
             Workflow was born from the pain we had in organizing incredible events.
           </p>
 
@@ -156,6 +174,13 @@ export default function About() {
           </Link>
         </div>
       </div>
+
+            {/* Footer */}
+      <footer id="about" className="bg-slate-900 text-gray-400 py-8 mt-auto">
+        <div className="max-w-6xl mx-auto px-6 text-center text-sm">
+          <p>© {new Date().getFullYear()} Workflow. All rights reserved.</p>
+        </div>
+      </footer>
     </>
   )
 }

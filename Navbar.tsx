@@ -1,4 +1,6 @@
-// Navbar.tsx
+// Navbar.tsx 
+
+// Not in use. 
 import React from 'react';
 
 const Navbar = () => {
