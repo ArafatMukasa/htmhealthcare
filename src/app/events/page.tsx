@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import type { Event } from '@/lib/types'
+import WorkflowLogo from '@/components/WorkflowLogo'
 
 export const metadata = { title: 'Events — Workflow' }
 
@@ -15,7 +16,13 @@ export default async function EventsPage() {
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-3 sm:py-4 flex items-center gap-2 sm:gap-3">
-          <Link href="/" className="font-bold text-slate-900 text-sm sm:text-base">Workflow</Link>
+          <WorkflowLogo
+            className="flex items-center"
+            expandedWidth="7.25rem"
+            collapsedWidth="3.5rem"
+            expandedHeight="1.25rem"
+            collapsedHeight="2.2rem"
+          />
           <span className="text-gray-300">/</span>
           <span className="text-gray-600 text-sm">Events</span>
         </div>

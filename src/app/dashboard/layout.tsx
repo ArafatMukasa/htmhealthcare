@@ -14,7 +14,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <DashboardSidebar userEmail={user.email ?? ''} />
 
       {/* Main content — on mobile, offset by the fixed top bar height (14 = 56px) */}
-      <main className="flex-1 overflow-auto pt-14 md:pt-0 min-w-0">
+      <main id="dashboard-scroll-area" className="flex-1 overflow-auto pt-14 md:pt-0 min-w-0">
         {children}
       </main>
     </div>

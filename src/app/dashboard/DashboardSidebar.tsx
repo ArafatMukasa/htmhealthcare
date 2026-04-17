@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import WorkflowLogo from '@/components/WorkflowLogo'
 import LogoutButton from './LogoutButton'
 
 const navItems = [
@@ -34,9 +35,14 @@ export default function DashboardSidebar({ userEmail }: Props) {
     <>
       {/* ── Mobile top bar ── */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 flex items-center justify-between px-4 h-14">
-        <Link href="/" className="font-bold text-indigo-600 text-base">
-          Workflow Africa
-        </Link>
+        <WorkflowLogo
+          scrollTargetId="dashboard-scroll-area"
+          className="flex items-center"
+          expandedWidth="7.5rem"
+          collapsedWidth="3.75rem"
+          expandedHeight="1.35rem"
+          collapsedHeight="2.35rem"
+        />
         <button
           onClick={() => setOpen(true)}
           className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
@@ -74,9 +80,14 @@ export default function DashboardSidebar({ userEmail }: Props) {
         {/* Sidebar header */}
         <div className="p-5 border-b border-gray-200 flex items-center justify-between min-h-[56px]">
           <div className="min-w-0">
-            <Link href="/" className="font-bold text-indigo-600 text-lg leading-none">
-              Workflow Africa
-            </Link>
+            <WorkflowLogo
+              scrollTargetId="dashboard-scroll-area"
+              className="inline-flex items-center"
+              expandedWidth="8.75rem"
+              collapsedWidth="4.2rem"
+              expandedHeight="1.5rem"
+              collapsedHeight="2.6rem"
+            />
             <p className="text-xs text-gray-400 mt-1 truncate max-w-[160px]">{userEmail}</p>
           </div>
           {/* Close button — mobile only */}

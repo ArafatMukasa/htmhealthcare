@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import WorkflowLogo from '@/components/WorkflowLogo'
 
 type NavbarProps = {
   showAboutLink?: boolean
@@ -13,6 +14,7 @@ export default function Navbar({ showAboutLink = true }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30)
+    handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -38,13 +40,14 @@ export default function Navbar({ showAboutLink = true }: NavbarProps) {
             scrolled ? 'shadow-xl shadow-black/10' : 'shadow-lg shadow-black/5',
           ].join(' ')}
         >
-          <div className="flex flex-shrink-0 items-center gap-2">
-            <svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 2C7.373 2 2 7.373 2 14s5.373 12 12 12 12-5.373 12-12S20.627 2 14 2z" fill="#1e293b" />
-              <path d="M10 8c0 0 1 2 0 4s-2 3-1 5 3 3 5 3 4-2 4-4-1-3-3-4-3-1-3-3 1-3 0-4-2 3-2 3z" fill="#f0f9ff" />
-            </svg>
-            <span className="text-base font-bold text-slate-900 sm:text-lg">Workflow</span>
-          </div>
+          <WorkflowLogo
+            scrolled={scrolled}
+            className="flex flex-shrink-0 items-center"
+            expandedWidth="clamp(7.5rem, 13vw, 9.5rem)"
+            collapsedWidth="clamp(3.8rem, 7vw, 4.6rem)"
+            expandedHeight="clamp(1.35rem, 2vw, 1.7rem)"
+            collapsedHeight="clamp(2rem, 3.4vw, 2.6rem)"
+          />
 
           <div className="hidden items-center gap-6 sm:flex">
             {showAboutLink && (

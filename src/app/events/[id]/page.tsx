@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { createServiceClient } from '@/lib/supabase/server'
 import RSVPForm from './RSVPForm'
 import type { Event, Gender, AgeRange, DisabilityState, County, SubCounty } from '@/lib/types'
+import WorkflowLogo from '@/components/WorkflowLogo'
 
 interface Props { params: Promise<{ id: string }> }
 
@@ -44,7 +45,13 @@ export default async function EventDetailPage({ params }: Props) {
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 py-3 sm:py-4 flex items-center gap-2 text-sm overflow-x-auto">
-          <Link href="/" className="font-bold text-indigo-600 whitespace-nowrap">Workflow Africa</Link>
+          <WorkflowLogo
+            className="flex items-center"
+            expandedWidth="7.25rem"
+            collapsedWidth="3.5rem"
+            expandedHeight="1.25rem"
+            collapsedHeight="2.2rem"
+          />
           <span className="text-gray-300">/</span>
           <Link href="/events" className="text-gray-600 hover:text-indigo-600 whitespace-nowrap">Events</Link>
           <span className="text-gray-300">/</span>
