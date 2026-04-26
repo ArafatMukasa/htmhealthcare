@@ -29,21 +29,6 @@ const heroGallery = [
   },
 ] as const
 
-const aboutHighlights = [
-  {
-    title: 'create incredible events',
-    accentClassName:
-      'border-amber-200/80 bg-[linear-gradient(135deg,rgba(255,247,237,0.96),rgba(255,255,255,0.92))]',
-    dotClassName: 'bg-amber-400',
-  },
-  {
-    title: 'discover memorable ones',
-    accentClassName:
-      'border-sky-200/80 bg-[linear-gradient(135deg,rgba(240,249,255,0.96),rgba(255,255,255,0.92))]',
-    dotClassName: 'bg-sky-400',
-  },
-] as const
-
 export default function About() {
   const aboutTextRef = useRef<HTMLDivElement | null>(null)
   const [aboutMediaHeight, setAboutMediaHeight] = useState<number | null>(null)
@@ -96,7 +81,7 @@ export default function About() {
                   Make hosting and discovering events simple and impactful
                 </h1>
                 <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-                  Great events have the power to educate, entertain, inspire, and connect communities, but the infrastructure behind events — creation, discovery, registration, check-in — had lagged behind. Workflow came into existence to close that gap.
+                  Incredible events have the power to educate, entertain, inspire, and connect communities, but the infrastructure behind events — creation, discovery, registration, check-in — had lagged behind. Workflow came into existence to close that gap.
                 </p>
               </div>
             </div>
@@ -134,7 +119,7 @@ export default function About() {
                   About Workflow
                 </h2>
                 <h3 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl lg:leading-[1.05]">
-                  A refreshingly different and better events platform.
+                  A refreshingly different and better events platform
                 </h3>
                 <p className="mt-4 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
                   Workflow enables hosts to create incredible events and attendees to discover memorable ones.
@@ -151,7 +136,7 @@ export default function About() {
                 >
                   <div className="relative h-full w-full overflow-hidden">
                     <Image
-                      src="/assets/images/EventDetailScreen.svg"
+                      src="/assets/images/Workflow_mockup.png"
                       alt="Workflow product preview"
                       fill
                       sizes="(min-width: 1024px) 42vw, 100vw"

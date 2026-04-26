@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import type { Event } from '@/lib/types'
 
-export const metadata = { title: 'Dashboard — Workflow Africa' }
+export const metadata = { title: 'Dashboard — Workflow' }
 
 export default async function DashboardPage() {
   const supabase = await createClient()
