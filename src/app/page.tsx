@@ -17,8 +17,8 @@ export default function HomePage() {
                 className="font-black text-slate-900 leading-[1.1] mb-4 sm:mb-6 tracking-tight"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.75rem)' }}
               >
-                Memorable Event Experiences<br />
-                start here
+                Powering Better<br />
+                Healthcare
               </h1>
               <p
                 className="text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-md mx-auto lg:mx-0"
