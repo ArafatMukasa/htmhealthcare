@@ -4,11 +4,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import WorkflowLogo from '@/components/WorkflowLogo'
 
-type NavbarProps = {
-  showAboutLink?: boolean
-}
-
-export default function Navbar({ showAboutLink = true }: NavbarProps) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -43,34 +39,27 @@ export default function Navbar({ showAboutLink = true }: NavbarProps) {
           <WorkflowLogo
             scrolled={scrolled}
             className="flex flex-shrink-0 items-center"
-            expandedWidth="clamp(7.5rem, 13vw, 9.5rem)"
-            collapsedWidth="clamp(3.8rem, 7vw, 4.6rem)"
-            expandedHeight="clamp(1.35rem, 2vw, 1.7rem)"
-            collapsedHeight="clamp(2rem, 3.4vw, 2.6rem)"
+            expandedWidth="clamp(10rem, 18vw, 13rem)"
+            collapsedWidth="clamp(7rem, 13vw, 9rem)"
+            expandedHeight="clamp(1.8rem, 2.8vw, 2.2rem)"
+            collapsedHeight="clamp(1.8rem, 2.8vw, 2.2rem)"
           />
 
-          <div className="hidden items-center gap-6 sm:flex">
-            {showAboutLink && (
-              <Link href="/about" className="text-sm text-gray-600 transition-colors hover:text-gray-900">
-                About
-              </Link>
-            )}
-          </div>
 
           <div className="flex flex-shrink-0 items-center gap-2">
             <Link
               href="/events"
               className="hidden whitespace-nowrap rounded-full border border-slate-900 px-4 py-2 text-sm font-medium text-slate-900 transition-colors hover:bg-slate-50 sm:inline-flex sm:px-5"
             >
-              Discover Events
+              Learn more
             </Link>
 
-            <Link
-              href="/login"
+            <a
+              href="mailto:healthcarehtm@gmail.com"
               className="hidden whitespace-nowrap rounded-full bg-slate-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-800 sm:inline-flex"
             >
-              Create Event
-            </Link>
+              Contact Us
+            </a>
 
             <button
               type="button"
@@ -89,29 +78,20 @@ export default function Navbar({ showAboutLink = true }: NavbarProps) {
 
       {isOpen && (
         <div className="fixed left-3 right-3 top-16 z-50 flex flex-col gap-2 rounded-2xl border border-white/50 bg-white/90 px-5 py-4 shadow-xl backdrop-blur-md sm:hidden">
-          {showAboutLink && (
-            <Link
-              href="/about"
-              className="rounded-lg px-2 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900"
-              onClick={close}
-            >
-              About
-            </Link>
-          )}
           <Link
             href="/events"
             className="rounded-full border border-slate-900 px-5 py-2.5 text-center text-sm font-medium text-slate-900 transition-colors hover:bg-slate-50"
             onClick={close}
           >
-            Discover Events
+            Learn more
           </Link>
-          <Link
-            href="/login"
+          <a
+            href="mailto:healthcarehtm@gmail.com"
             className="rounded-full bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white transition-colors hover:bg-slate-800"
             onClick={close}
           >
-            Create Event
-          </Link>
+            Contact Us
+          </a>
         </div>
       )}
 

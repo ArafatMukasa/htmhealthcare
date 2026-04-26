@@ -55,7 +55,7 @@ export default function WorkflowLogo({
   const isScrolled = scrolled ?? internalScrolled
 
   return (
-    <Link href={href} className={className} aria-label="Workflow home">
+    <Link href={href} className={className} aria-label="HTM Healthcare home">
       <span
         className="relative block origin-left transition-[width,height] duration-300 ease-out"
         style={{
@@ -64,24 +64,11 @@ export default function WorkflowLogo({
         }}
       >
         <Image
-          src="/assets/images/workflow-logo-horizontal.svg"
-          alt=""
+          src="/assets/images/htmhealthcare-logo.svg"
+          alt="HTM Healthcare"
           fill
-          sizes="160px"
-          className={[
-            'absolute inset-0 h-full w-full object-contain object-left transition-all duration-300 ease-out',
-            isScrolled ? 'scale-95 opacity-0' : 'scale-100 opacity-100',
-          ].join(' ')}
-        />
-        <Image
-          src="/assets/images/workflow-logo-stacked.svg"
-          alt=""
-          fill
-          sizes="80px"
-          className={[
-            'absolute inset-0 h-full w-full object-contain object-left transition-all duration-300 ease-out',
-            isScrolled ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
-          ].join(' ')}
+          sizes="(max-width: 640px) 120px, 200px"
+          className="absolute inset-0 h-full w-full object-contain object-left"
         />
       </span>
     </Link>

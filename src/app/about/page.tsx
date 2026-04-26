@@ -66,7 +66,7 @@ export default function About() {
 
   return (
     <>
-      <Navbar showAboutLink={false} />
+      <Navbar />
 
       <div className="px-4 pb-10 pt-24 sm:px-6 sm:pt-28 lg:px-8 lg:pb-16">
         <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-slate-200/80 bg-[linear-gradient(180deg,_#fafaf9_0%,_#f5f5f4_100%)] shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
