@@ -10,7 +10,8 @@
       "Bash(find C:UsersUserAndroidStudioProjectsworkflow-web-app -maxdepth 2 -type f \\\\\\(-name *.env* -o -name vercel.json -o -name netlify.toml -o -name dockerfile -o -name .dockerignore \\\\\\))",
       "WebFetch(domain:docs.mattermost.com)",
       "Bash(npm list:*)",
-      "Bash(node generate_arch_doc.js)"
+      "Bash(node generate_arch_doc.js)",
+      "Bash(npm run *)"
     ]
   }
 }

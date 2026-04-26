@@ -1,63 +1,135 @@
 #!/bin/bash
+# ============================================================
+#  HTM Healthcare — VPS deploy script (shared server safe)
+#  Port: 3001  |  Domain: htmhealthcare.com
+#  Does NOT touch other apps, PM2 processes, or nginx sites.
+# ============================================================
 set -e
 
 APP_DIR="/var/www/htmhealthcare"
-REPO_URL="https://github.com/ArafatMukasa/htmhealthcare.git"  # update if different
+REPO_URL="https://github.com/ArafatMukasa/htmhealthcare.git"
 NGINX_CONF="/etc/nginx/sites-available/htmhealthcare"
+PORT=3001
 
-echo "=== 1. Updating system packages ==="
-apt update && apt upgrade -y
+# ------------------------------------
+# 1. Pre-flight: check port is free
+# ------------------------------------
+echo "=== Checking port $PORT is free ==="
+if ss -tlnp | grep -q ":$PORT "; then
+  echo "ERROR: Port $PORT is already in use. Change PORT in this script."
+  exit 1
+fi
 
-echo "=== 2. Installing Node.js 20.x ==="
-curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-apt install -y nodejs
+# ------------------------------------
+# 2. Install Node.js only if missing
+# ------------------------------------
+if ! command -v node &>/dev/null; then
+  echo "=== Installing Node.js 20.x ==="
+  curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+  apt install -y nodejs
+else
+  echo "=== Node.js $(node -v) already installed — skipping ==="
+fi
 
-echo "=== 3. Installing PM2 ==="
-npm install -g pm2
+# ------------------------------------
+# 3. Install PM2 only if missing
+# ------------------------------------
+if ! command -v pm2 &>/dev/null; then
+  echo "=== Installing PM2 ==="
+  npm install -g pm2
+else
+  echo "=== PM2 $(pm2 -v) already installed — skipping ==="
+fi
 
-echo "=== 4. Installing git ==="
-apt install -y git
+# ------------------------------------
+# 4. Install git if missing
+# ------------------------------------
+if ! command -v git &>/dev/null; then
+  apt install -y git
+fi
 
-echo "=== 5. Cloning / pulling repo ==="
+# ------------------------------------
+# 5. Clone or pull latest code
+# ------------------------------------
+echo "=== Syncing code to $APP_DIR ==="
 if [ -d "$APP_DIR/.git" ]; then
-  cd "$APP_DIR"
-  git pull
+  cd "$APP_DIR" && git pull
 else
   mkdir -p "$APP_DIR"
   git clone "$REPO_URL" "$APP_DIR"
-  cd "$APP_DIR"
+fi
+cd "$APP_DIR"
+
+# ------------------------------------
+# 6. Create a minimal .env.local
+#    No Supabase credentials needed —
+#    this is a marketing-only site.
+# ------------------------------------
+if [ ! -f "$APP_DIR/.env.local" ]; then
+  echo "=== Creating minimal .env.local ==="
+  cat > "$APP_DIR/.env.local" <<EOF
+NEXT_PUBLIC_APP_URL=https://htmhealthcare.com
+EOF
 fi
 
-echo "=== 6. Writing .env.local — FILL IN VALUES BEFORE RUNNING ==="
-# Uncomment and populate these before running the script:
-# cat > "$APP_DIR/.env.local" <<EOF
-# NEXT_PUBLIC_SUPABASE_URL=your_value_here
-# NEXT_PUBLIC_SUPABASE_ANON_KEY=your_value_here
-# SUPABASE_SERVICE_ROLE_KEY=your_value_here
-# NEXT_PUBLIC_APP_URL=https://htmhealthcare.com
-# EOF
-
-echo "=== 7. Installing dependencies ==="
-cd "$APP_DIR"
+# ------------------------------------
+# 7. Install dependencies & build
+# ------------------------------------
+echo "=== Installing dependencies ==="
 npm ci --production=false
 
-echo "=== 8. Building Next.js app ==="
+echo "=== Building Next.js app ==="
 npm run build
 
-echo "=== 9. Configuring nginx ==="
+# ------------------------------------
+# 8. Nginx — add htmhealthcare only.
+#    All other nginx sites are untouched.
+# ------------------------------------
+echo "=== Adding nginx site: htmhealthcare ==="
 cp "$APP_DIR/nginx.conf" "$NGINX_CONF"
 ln -sf "$NGINX_CONF" /etc/nginx/sites-enabled/htmhealthcare
-rm -f /etc/nginx/sites-enabled/default
 nginx -t && systemctl reload nginx
 
-echo "=== 10. Starting app with PM2 ==="
+# ------------------------------------
+# 9. PM2 — start/restart this app only.
+#    Other PM2 processes stay running.
+# ------------------------------------
+echo "=== Starting app with PM2 (port $PORT) ==="
 pm2 delete htmhealthcare 2>/dev/null || true
 pm2 start "$APP_DIR/ecosystem.config.js"
-pm2 save
-pm2 startup systemd -u root --hp /root
+pm2 save   # saves full process list (keeps other apps alive on reboot)
 
-echo "=== 11. Setting up SSL with Let's Encrypt ==="
-apt install -y certbot python3-certbot-nginx
-certbot --nginx -d htmhealthcare.com -d www.htmhealthcare.com --non-interactive --agree-tos -m araphatarafat@gmail.com
+# Only register PM2 startup if not already registered
+if ! systemctl is-enabled pm2-root &>/dev/null 2>&1; then
+  echo "=== Registering PM2 startup service ==="
+  pm2 startup systemd -u root --hp /root
+  systemctl enable pm2-root
+fi
 
-echo "=== Done! Site is live at https://htmhealthcare.com ==="
+# ------------------------------------
+# 10. SSL via Let's Encrypt
+# ------------------------------------
+echo "=== Setting up SSL ==="
+if ! command -v certbot &>/dev/null; then
+  apt install -y certbot python3-certbot-nginx
+fi
+certbot --nginx \
+  -d htmhealthcare.com \
+  -d www.htmhealthcare.com \
+  --non-interactive \
+  --agree-tos \
+  -m araphatarafat@gmail.com
+
+echo ""
+echo "=============================================="
+echo "  Done!  https://htmhealthcare.com is live."
+echo "  App running on port $PORT via PM2."
+echo ""
+echo "  Useful commands:"
+echo "    pm2 status                      # see all apps"
+echo "    pm2 logs htmhealthcare          # view logs"
+echo "    pm2 restart htmhealthcare       # restart this app"
+echo ""
+echo "  To redeploy after code changes:"
+echo "    cd $APP_DIR && git pull && npm ci && npm run build && pm2 restart htmhealthcare"
+echo "=============================================="

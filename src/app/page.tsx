@@ -1,17 +1,7 @@
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase/server'
-import type { Event } from '@/lib/types'
 import Navbar from './Navbar'
 
-export default async function HomePage() {
-  const supabase = await createClient()
-  const { data: events } = await supabase
-    .from('events')
-    .select('id, name, date, venue, organizer, status')
-    .eq('status', 'published')
-    .order('date', { ascending: true })
-    .limit(6)
-
+export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -21,7 +11,7 @@ export default async function HomePage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 lg:gap-16 lg:items-center">
 
-            {/* Left (desktop) / Top (mobile): text + CTAs */}
+            {/* Left: text + CTAs */}
             <div className="text-center lg:text-left">
               <h1
                 className="font-black text-slate-900 leading-[1.1] mb-4 sm:mb-6 tracking-tight"
@@ -30,28 +20,29 @@ export default async function HomePage() {
                 Memorable Event Experiences<br />
                 start here
               </h1>
-              <p className="text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-md mx-auto lg:mx-0"
+              <p
+                className="text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-md mx-auto lg:mx-0"
                 style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)' }}
               >
                 Create incredible events as a host, or discover memorable ones as an attendee.
               </p>
               <div className="flex flex-wrap justify-center lg:justify-start items-center gap-3 sm:gap-4">
                 <Link
-                  href="/login"
+                  href="/about"
                   className="bg-slate-900 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-slate-800 transition-colors"
                 >
-                  Create Event
+                  Learn More
                 </Link>
-                <Link
-                  href="/events"
+                <a
+                  href="mailto:info@htmhealthcare.com"
                   className="border border-slate-800 text-slate-900 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-white/60 transition-colors"
                 >
-                  Discover Events
-                </Link>
+                  Contact Us
+                </a>
               </div>
             </div>
 
-            {/* Right (desktop) / Bottom (mobile): phone mockup */}
+            {/* Right: phone mockup */}
             <div className="flex justify-center items-center mt-12 lg:mt-0">
               <div className="relative">
                 <div className="w-56 h-[460px] bg-slate-900 rounded-[42px] p-2 shadow-2xl">
@@ -76,7 +67,7 @@ export default async function HomePage() {
                       </div>
                       {/* Form card */}
                       <div className="bg-gray-50 rounded-xl p-3 flex-1 border border-gray-100">
-                        <div className="font-semibold text-xs text-gray-800 mb-3"> Founders, Operators, & Investors Mixer</div>
+                        <div className="font-semibold text-xs text-gray-800 mb-3">Founders, Operators, &amp; Investors Mixer</div>
                         <div className="space-y-2">
                           <div>
                             <div className="text-[9px] text-gray-500 mb-0.5">Full name</div>
@@ -101,40 +92,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-
-      {/* Upcoming Events */}
-      {events && events.length > 0 && (
-        <section className="py-12 sm:py-20">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="flex items-center justify-between mb-6 sm:mb-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Upcoming Events</h2>
-              <Link href="/events" className="text-slate-900 hover:text-slate-700 font-medium text-sm underline underline-offset-2">
-                View all →
-              </Link>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {events.map((event: Pick<Event, 'id' | 'name' | 'date' | 'venue' | 'organizer' | 'status'>) => (
-                <Link key={event.id} href={`/events/${event.id}`}>
-                  <div className="card p-6 hover:border-slate-300 hover:shadow-md transition-all h-full rounded-2xl">
-                    <h3 className="font-semibold text-gray-900 mb-3">{event.name}</h3>
-                    <div className="space-y-1 text-sm text-gray-500 mb-4">
-                      <p>📍 {event.venue}</p>
-                      <p>📅 {new Date(event.date).toLocaleDateString('en-KE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                      <p>👤 {event.organizer}</p>
-                    </div>
-                    <span className="text-sm text-slate-900 font-medium">RSVP →</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Footer */}
-      <footer id="about" className="bg-slate-900 text-gray-400 py-8 mt-auto">
+      <footer className="bg-slate-900 text-gray-400 py-8 mt-auto">
         <div className="max-w-6xl mx-auto px-6 text-center text-sm">
-          <p>© {new Date().getFullYear()} Workflow. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} HTM Healthcare. All rights reserved.</p>
         </div>
       </footer>
     </div>
