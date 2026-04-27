@@ -3,10 +3,10 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'HTM Healthcare',
-  description: 'Memorable Event Experiences Start Here.',
+  description: 'HTM is Powering Better Healthcare.',
   openGraph: {
     title: 'HTM Healthcare',
-    description: 'Memorable Event Experiences Start Here.',
+    description: 'HTM is Powering Better Healthcare.',
     url: 'https://htmhealthcare.com',
     siteName: 'HTM Healthcare',
   },
