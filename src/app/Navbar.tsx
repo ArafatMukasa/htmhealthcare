@@ -48,14 +48,14 @@ export default function Navbar() {
 
           <div className="flex flex-shrink-0 items-center gap-2">
             <Link
-              href="/events"
+              href="/#"
               className="hidden whitespace-nowrap rounded-full border border-slate-900 px-4 py-2 text-sm font-medium text-slate-900 transition-colors hover:bg-slate-50 sm:inline-flex sm:px-5"
             >
               Learn more
             </Link>
 
             <a
-              href="mailto:healthcarehtm@gmail.com"
+              href="/contact"
               className="hidden whitespace-nowrap rounded-full bg-slate-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-800 sm:inline-flex"
             >
               Contact Us
@@ -79,14 +79,14 @@ export default function Navbar() {
       {isOpen && (
         <div className="fixed left-3 right-3 top-16 z-50 flex flex-col gap-2 rounded-2xl border border-white/50 bg-white/90 px-5 py-4 shadow-xl backdrop-blur-md sm:hidden">
           <Link
-            href="/events"
+            href="/#"
             className="rounded-full border border-slate-900 px-5 py-2.5 text-center text-sm font-medium text-slate-900 transition-colors hover:bg-slate-50"
             onClick={close}
           >
             Learn more
           </Link>
           <a
-            href="mailto:healthcarehtm@gmail.com"
+            href="/contact"
             className="rounded-full bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white transition-colors hover:bg-slate-800"
             onClick={close}
           >

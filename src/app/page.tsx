@@ -27,7 +27,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-wrap justify-center lg:justify-start items-center gap-3 sm:gap-4">
               <Link
-                href="about"
+                href="/#"
                 className="bg-slate-900 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-semibold hover:bg-slate-800 transition-colors"
               >
                 Learn More
