@@ -8,12 +8,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
+      },
       colors: {
         brand: {
-          50: '#eef2ff',
-          100: '#e0e7ff',
-          600: '#4f46e5',
-          700: '#4338ca',
+          coral: '#F24E4E',
+          amber: '#FF9F1C',
+          violet: '#7B5CF0',
+          teal: '#00BFA5',
+          sky: '#1FB6FF',
+          charcoal: '#0E1117',
+          navy: '#08111F',
+          mist: '#F2F3F5',
         },
       },
     },

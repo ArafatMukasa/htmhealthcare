@@ -1,280 +1,488 @@
-'use client'
-
-import beachFunImage from '../../public/assets/images/Beach_fun.jpg'
-import mentorshipSessionImage from '../../public/assets/images/Mentorship_session.jpg'
-import z500509Image from '../../public/assets/images/Z50_0509.jpg'
-import Navbar from '../Navbar'
-import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import Navbar from '../Navbar'
 
-const heroGallery = [
+const brandColors = {
+  coral: '#F24E4E',
+  amber: '#FF9F1C',
+  violet: '#7B5CF0',
+  teal: '#00BFA5',
+  sky: '#1FB6FF',
+}
+
+function HtmMark({ size = 72 }: { size?: number }) {
+  return (
+    <svg width={size} height={(size * 82) / 72} viewBox="0 0 72 82" fill="none" aria-hidden="true">
+      <rect x="4" y="4" width="26" height="26" rx="13" fill={brandColors.coral} />
+      <rect x="42" y="4" width="26" height="26" rx="13" fill={brandColors.amber} />
+      <rect x="4" y="32" width="64" height="18" rx="8" fill={brandColors.violet} />
+      <rect x="4" y="52" width="26" height="26" rx="13" fill={brandColors.teal} />
+      <rect x="42" y="52" width="26" height="26" rx="13" fill={brandColors.sky} />
+    </svg>
+  )
+}
+
+const missionCards = [
   {
-    src: beachFunImage,
-    alt: 'Youth entrepreneurs having fun at the beach',
-    className: 'sm:col-span-2 lg:col-span-1 lg:row-span-2',
-    imageClassName: 'object-center',
+    color: brandColors.coral,
+    label: 'Outcomes',
+    title: 'Patient Outcomes',
+    body: 'Improved care quality and results for patients across every facility we serve.',
   },
   {
-    src: mentorshipSessionImage,
-    alt: 'Mentorship session for entrepreneurs',
-    className: 'lg:col-span-1 lg:row-span-1',
-    imageClassName: 'object-center',
+    color: brandColors.amber,
+    label: 'Performance',
+    title: 'Efficiency',
+    body: 'Enhanced operational performance that keeps your teams focused on care, not paperwork.',
   },
   {
-    src: z500509Image,
-    alt: 'Festival goers enjoying a community event',
-    className: 'lg:col-span-1 lg:row-span-1',
-    imageClassName: 'object-center',
+    color: brandColors.teal,
+    label: 'Sustainability',
+    title: 'Reduced Costs',
+    body: 'Sustainable healthcare delivery with optimized resources and predictable pricing.',
   },
-] as const
+]
+
+const whyCards = [
+  {
+    color: brandColors.coral,
+    label: 'Experience',
+    title: 'Real Experience',
+    body: "We've worked the night shifts, signed the service contracts, and stood next to the technician at 3am when the scanner went down. Every product decision is shaped by the people who've done the work.",
+  },
+  {
+    color: brandColors.amber,
+    label: 'Technology',
+    title: 'Vendor-Neutral Technology',
+    body: 'Vendor-neutral, modality-agnostic technology that works with your existing infrastructure and equipment, regardless of manufacturer.',
+  },
+  {
+    color: brandColors.violet,
+    label: 'Support',
+    title: 'Embedded Experts',
+    body: 'Embedded clinical engineers, not call-center triage. Get direct access to experts who understand your equipment.',
+  },
+  {
+    color: brandColors.sky,
+    label: 'Pricing',
+    title: 'Transparent Pricing',
+    body: "Transparent pricing aligned with your capital plan. No hidden fees, no surprises—just clear, predictable costs that fit your budget.",
+  },
+]
+
+const values = [
+  {
+    color: brandColors.coral,
+    title: 'Insane Customer Focus',
+    body: "Our customers are why we exist. We listen to them, design for their needs, and aim to make our user experience elegant and intuitive. We put what's best for customers at the center of decision-making, bringing them the best in technology coupled with real value. When there are customer pain points, we fix them quickly.",
+  },
+  {
+    color: brandColors.amber,
+    title: 'Excellence Everywhere',
+    body: "We operate with extreme urgency. We push for progress without compromising quality—and when something is broken, we fix it. We're driven by impact and pride ourselves in our ability to be nimble and quickly adjust our strategy when presented with new information.",
+  },
+  {
+    color: brandColors.violet,
+    title: 'Lean and Disciplined',
+    body: "We do more with less. Constraint drives us to innovate through scalable technology—not excess resources. We set ambitious goals, benchmark performance, and weigh trade-offs before changing course. By keeping costs low and efficiency high, we deliver exceptional value customers can't find anywhere else.",
+  },
+  {
+    color: brandColors.sky,
+    title: 'First Principles Thinking',
+    body: "We only follow the crowd when they're right. We're innovators and problem solvers. We use data, empirical truth, and experiments to inform decisions. Our bold bets often make us a first mover, and we do what's right for customers—even if it hasn't been done before.",
+  },
+  {
+    color: brandColors.teal,
+    title: 'Have Fun and Enjoy the Journey',
+    body: "We believe in celebrating progress and finding joy in the work we do. Building better healthcare is challenging, but that doesn't mean it can't be rewarding and enjoyable along the way.",
+  },
+  {
+    color: brandColors.coral,
+    title: 'Take Ownership',
+    body: "A company is nothing but a collection of people. We believe in the power of every individual at HTM. We channel that power by giving individuals significant ownership of their work. In exchange, we require everyone here to care—a lot. Feathers will get ruffled, and that's the price we're willing to pay to keep pushing our standards ever higher.",
+    highlighted: true,
+  },
+]
 
 export default function About() {
-  const aboutTextRef = useRef<HTMLDivElement | null>(null)
-  const [aboutMediaHeight, setAboutMediaHeight] = useState<number | null>(null)
-
-  useEffect(() => {
-    const textBlock = aboutTextRef.current
-
-    if (!textBlock || typeof window === 'undefined') {
-      return
-    }
-
-    const syncAboutMediaHeight = () => {
-      if (window.innerWidth >= 1024) {
-        setAboutMediaHeight(textBlock.getBoundingClientRect().height)
-        return
-      }
-
-      setAboutMediaHeight(null)
-    }
-
-    syncAboutMediaHeight()
-
-    const resizeObserver = new ResizeObserver(() => {
-      syncAboutMediaHeight()
-    })
-
-    resizeObserver.observe(textBlock)
-    window.addEventListener('resize', syncAboutMediaHeight)
-
-    return () => {
-      resizeObserver.disconnect()
-      window.removeEventListener('resize', syncAboutMediaHeight)
-    }
-  }, [])
-
   return (
-    <>
+    <div className="flex min-h-screen flex-col bg-white text-brand-charcoal">
       <Navbar />
 
-      <div className="px-4 pb-10 pt-24 sm:px-6 sm:pt-28 lg:px-8 lg:pb-16">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-slate-200/80 bg-[linear-gradient(180deg,_#fafaf9_0%,_#f5f5f4_100%)] shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
-          <div className="grid gap-10 px-6 py-8 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)] lg:items-center lg:gap-8 lg:px-12 lg:py-12 xl:px-14 xl:py-14">
-            <div className="relative">
-              <div className="absolute inset-x-0 top-0 h-40 rounded-full bg-orange-100/60 blur-3xl" />
-              <div className="relative">
-                <p className="mb-5 text-sm font-semibold uppercase tracking-[0.35em] text-slate-600">
-                  Our Mission
-                </p>
-                <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl lg:leading-[1.05]">
-                  Make hosting and discovering events simple and impactful
-                </h1>
-                <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-                  Incredible events have the power to educate, entertain, inspire, and connect communities, but the infrastructure behind events — creation, discovery, registration, check-in — had lagged behind. Workflow came into existence to close that gap.
-                </p>
-              </div>
+      {/* ─── HERO ─────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden pt-32 pb-24 sm:pt-40 sm:pb-32">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute -top-40 -left-40 h-[480px] w-[480px] rounded-full bg-brand-violet/15 blur-3xl" />
+          <div className="absolute top-20 -right-32 h-[420px] w-[420px] rounded-full bg-brand-teal/15 blur-3xl" />
+          <div className="absolute bottom-0 left-1/3 h-[360px] w-[360px] rounded-full bg-brand-sky/10 blur-3xl" />
+        </div>
+
+        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-[1.1fr,0.9fr] lg:px-8">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-charcoal/10 bg-white/70 px-4 py-1.5 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-coral" />
+              <span className="eyebrow">About HTM Healthcare</span>
             </div>
 
-            <div className="grid auto-rows-[160px] grid-cols-1 gap-4 sm:grid-cols-2 sm:auto-rows-[190px] lg:auto-rows-[150px] xl:auto-rows-[170px]">
-              {heroGallery.map((image) => (
+            <h1
+              className="mt-6 font-extrabold leading-[1.02] tracking-tight text-brand-charcoal"
+              style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.75rem)', letterSpacing: '-0.035em' }}
+            >
+              <span className="bg-gradient-to-r from-brand-charcoal to-brand-charcoal/50 bg-clip-text text-transparent">
+                We are HTM
+              </span>
+            </h1>
+
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-charcoal/65">
+              We provide technology and engineering solutions to hospitals, clinics, and radiology centers across Africa.
+            </p>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-brand-charcoal/60">
+              We build AI-enabled software to digitize healthcare operations and offer engineering solutions—including maintenance of medical imaging equipment—to enable Africa&apos;s most ambitious healthcare organizations to grow.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-charcoal px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-navy hover:shadow-xl hover:shadow-brand-charcoal/20"
+              >
+                Talk to our team
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </Link>
+              <Link
+                href="/solutions"
+                className="inline-flex items-center gap-2 rounded-full border border-brand-charcoal/15 bg-white/60 px-6 py-3 text-sm font-semibold text-brand-charcoal backdrop-blur transition-all hover:border-brand-charcoal/40 hover:bg-white"
+              >
+                Our solutions
+              </Link>
+            </div>
+
+            <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs font-medium uppercase tracking-[0.2em] text-brand-charcoal/40">
+              <span>HIPAA Compliant</span>
+              <span className="h-1 w-1 rounded-full bg-brand-charcoal/20" />
+              <span>SOC 2 Aligned</span>
+              <span className="h-1 w-1 rounded-full bg-brand-charcoal/20" />
+              <span>ISO 13485 Partners</span>
+            </div>
+          </div>
+
+          {/* ─── HERO VISUAL ─────────────────────────── */}
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="relative aspect-square">
+              <div className="absolute inset-6 rounded-[3rem] bg-gradient-to-br from-white via-brand-mist to-white shadow-2xl shadow-brand-charcoal/10 ring-1 ring-brand-charcoal/5" />
+
+              <div className="absolute left-[10%] top-[12%] animate-float-slow">
                 <div
-                  key={image.alt}
-                  className={`group relative overflow-hidden rounded-[1.75rem] bg-slate-200 ${image.className}`}
+                  className="rounded-3xl px-5 py-4 shadow-xl shadow-brand-coral/30"
+                  style={{ background: brandColors.coral }}
                 >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 24vw, (min-width: 640px) 42vw, 100vw"
-                    className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${image.imageClassName}`}
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70">Founded</div>
+                  <div className="mt-1 text-2xl font-extrabold leading-none text-white">2024</div>
+                  <div className="mt-1 text-[11px] font-medium text-white/80">Nairobi, Kenya</div>
+                </div>
+              </div>
+
+              <div className="absolute right-[6%] top-[18%] animate-float-med">
+                <div
+                  className="rounded-3xl px-5 py-4 shadow-xl shadow-brand-amber/30"
+                  style={{ background: brandColors.amber }}
+                >
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80">Serving</div>
+                  <div className="mt-1 text-2xl font-extrabold leading-none text-white">60+</div>
+                  <div className="mt-1 text-[11px] font-medium text-white/80">healthcare orgs</div>
+                </div>
+              </div>
+
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="rounded-[2rem] bg-white p-7 shadow-2xl shadow-brand-charcoal/15 ring-1 ring-brand-charcoal/5">
+                  <HtmMark size={104} />
+                </div>
+              </div>
+
+              <div className="absolute bottom-[16%] left-[6%] animate-float-fast">
+                <div
+                  className="rounded-3xl px-5 py-4 shadow-xl shadow-brand-teal/30"
+                  style={{ background: brandColors.teal }}
+                >
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80">Mission</div>
+                  <div className="mt-1 text-base font-extrabold leading-tight text-white">
+                    Power Better<br />Healthcare
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute bottom-[10%] right-[8%] animate-float-slow">
+                <div
+                  className="rounded-3xl px-5 py-4 shadow-xl shadow-brand-sky/30"
+                  style={{ background: brandColors.sky }}
+                >
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80">Focus</div>
+                  <div className="mt-1 text-2xl font-extrabold leading-none text-white">Africa</div>
+                  <div className="mt-1 text-[11px] font-medium text-white/80">first</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── MISSION ──────────────────────────────────────────────── */}
+      <section className="border-y border-brand-charcoal/10 bg-brand-mist/60 py-24 sm:py-32">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
+            <div>
+              <div className="eyebrow">Our Mission</div>
+              <h2
+                className="mt-3 text-4xl font-extrabold leading-tight tracking-tight text-brand-charcoal sm:text-5xl"
+                style={{ letterSpacing: '-0.03em' }}
+              >
+                Power Better<br />Healthcare
+              </h2>
+              <p className="mt-6 text-base leading-relaxed text-brand-charcoal/65">
+                HTM was founded and exists to Power Better Healthcare. This means improvement in patient outcomes, reduced costs, and enhanced operational efficiency for the healthcare organizations we serve.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+              {missionCards.map((card) => (
+                <div
+                  key={card.title}
+                  className="group relative overflow-hidden rounded-3xl border border-brand-charcoal/10 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand-charcoal/20 hover:shadow-xl hover:shadow-brand-charcoal/5"
+                >
+                  <div
+                    className="absolute -right-8 -top-8 h-28 w-28 rounded-full opacity-15 blur-2xl transition-opacity group-hover:opacity-30"
+                    style={{ background: card.color }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/10 via-transparent to-white/10" />
+                  <div
+                    className="flex h-11 w-11 items-center justify-center rounded-2xl"
+                    style={{ background: card.color }}
+                  >
+                    <span className="h-2.5 w-2.5 rounded-full bg-white/95" />
+                  </div>
+                  <div className="mt-6 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-charcoal/40">
+                    {card.label}
+                  </div>
+                  <h3
+                    className="mt-2 text-xl font-bold leading-snug tracking-tight text-brand-charcoal"
+                    style={{ letterSpacing: '-0.02em' }}
+                  >
+                    {card.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-brand-charcoal/60">{card.body}</p>
                 </div>
               ))}
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-[2.5rem] border border-slate-200/80 bg-[linear-gradient(145deg,_#ffffff_0%,_#f8fafc_48%,_#fff7ed_100%)] px-6 py-8 shadow-[0_30px_90px_rgba(15,23,42,0.08)] sm:px-8 lg:px-10 lg:py-10">
-            <div className="absolute -left-16 top-12 h-44 w-44 rounded-full bg-orange-100/70 blur-3xl" />
-            <div className="absolute bottom-0 right-0 h-64 w-64 translate-x-1/4 translate-y-1/4 rounded-full bg-slate-200/70 blur-3xl" />
+      {/* ─── WHY HTM ──────────────────────────────────────────────── */}
+      <section className="py-24 sm:py-32">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <div className="mb-14 max-w-2xl">
+            <div className="eyebrow">Why Choose Us</div>
+            <h2
+              className="mt-3 text-4xl font-extrabold leading-tight tracking-tight text-brand-charcoal sm:text-5xl"
+              style={{ letterSpacing: '-0.03em' }}
+            >
+              Built by medics, engineers,<br />
+              <span className="text-brand-charcoal/55">and operators.</span>
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-brand-charcoal/60">
+              Every decision we make is shaped by people who have done the work—on the night shift, in the OR, and in the equipment room.
+            </p>
+          </div>
 
-            <div className="relative grid items-start gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-stretch lg:gap-8">
-              <div ref={aboutTextRef} className="max-w-xl">
-                <h2 className="inline-flex rounded-full border border-slate-200/80 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-slate-600 backdrop-blur">
-                  About Workflow
-                </h2>
-                <h3 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl lg:leading-[1.05]">
-                  A refreshingly different and better events platform
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            {whyCards.map((card) => (
+              <div
+                key={card.title}
+                className="group relative overflow-hidden rounded-3xl border border-brand-charcoal/10 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand-charcoal/20 hover:shadow-xl hover:shadow-brand-charcoal/5"
+              >
+                <div
+                  className="absolute -right-8 -top-8 h-28 w-28 rounded-full opacity-15 blur-2xl transition-opacity group-hover:opacity-30"
+                  style={{ background: card.color }}
+                />
+                <div
+                  className="flex h-11 w-11 items-center justify-center rounded-2xl"
+                  style={{ background: card.color }}
+                >
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/95" />
+                </div>
+                <div className="mt-6 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-charcoal/40">
+                  {card.label}
+                </div>
+                <h3
+                  className="mt-2 text-xl font-bold leading-snug tracking-tight text-brand-charcoal"
+                  style={{ letterSpacing: '-0.02em' }}
+                >
+                  {card.title}
                 </h3>
-                <p className="mt-4 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-                  Workflow enables hosts to create incredible events and attendees to discover memorable ones.
+                <p className="mt-3 text-sm leading-relaxed text-brand-charcoal/60">{card.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CULTURE ──────────────────────────────────────────────── */}
+      <section className="bg-brand-charcoal py-24 text-white sm:py-32">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.9fr,1.1fr]">
+            <div>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/40">
+                Culture
+              </div>
+              <h2
+                className="mt-3 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl"
+                style={{ letterSpacing: '-0.03em' }}
+              >
+                Culture &amp; Core Values
+              </h2>
+
+              <div className="mt-8 overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-mist/10 via-white/5 to-brand-mist/5 p-8 ring-1 ring-white/10">
+                <p className="text-xl italic leading-relaxed text-white/90">
+                  &ldquo;A culture is not a set of beliefs, it&apos;s a set of actions.&rdquo;
                 </p>
+                <p className="mt-3 text-sm text-white/40">— BUSHIDO</p>
               </div>
 
-              <div className="relative lg:flex lg:items-stretch">
-                <div className="absolute -top-10 right-10 h-28 w-28 rounded-full bg-orange-200/60 blur-3xl" />
-                <div className="absolute -bottom-8 left-10 h-36 w-36 rounded-full bg-slate-300/60 blur-3xl" />
+              <p className="mt-8 max-w-md text-base leading-relaxed text-white/60">
+                Our culture is our way of doing things, not just reading about them. We are clear about our beliefs and what we stand for, and we make explicit our expectations of what it means to be a part of the HTM Healthcare team.
+              </p>
+            </div>
 
+            <div className="grid grid-cols-1 gap-px overflow-hidden rounded-3xl bg-white/10 sm:grid-cols-2">
+              {values.map((value, i) => (
                 <div
-                  className="relative mx-auto h-[360px] w-full max-w-[760px] sm:h-[500px] lg:flex lg:h-auto lg:max-w-none lg:items-stretch"
-                  style={aboutMediaHeight ? { height: `${aboutMediaHeight}px` } : undefined}
+                  key={value.title}
+                  className={`p-7 transition-colors hover:bg-brand-navy ${value.highlighted ? 'bg-white/5' : 'bg-brand-charcoal'}`}
                 >
-                  <div className="relative h-full w-full overflow-hidden">
-                    <Image
-                      src="/assets/images/Workflow_mockup.png"
-                      alt="Workflow product preview"
-                      fill
-                      sizes="(min-width: 1024px) 42vw, 100vw"
-                      className="object-contain scale-[1.12] sm:scale-[1.18] lg:scale-[1.22]"
-                      priority
-                    />
-                  </div>
+                  <div
+                    className="h-1 w-10 rounded-full"
+                    style={{ background: value.color }}
+                  />
+                  <h3
+                    className="mt-5 text-lg font-bold tracking-tight"
+                    style={{ letterSpacing: '-0.02em' }}
+                  >
+                    {value.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/60">{value.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CTA ──────────────────────────────────────────────────── */}
+      <section className="px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-brand-navy px-8 py-16 text-white sm:px-16 sm:py-20">
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-brand-violet/30 blur-3xl" />
+            <div className="absolute -right-10 bottom-0 h-72 w-72 rounded-full bg-brand-sky/25 blur-3xl" />
+          </div>
+          <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.3fr,0.7fr]">
+            <div>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/40">
+                Powering Better Healthcare
+              </div>
+              <h2
+                className="mt-4 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl"
+                style={{ letterSpacing: '-0.03em' }}
+              >
+                Ready to power better<br />
+                healthcare?
+              </h2>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/65">
+                Join Africa&apos;s leading healthcare organizations in transforming patient care through technology and engineering.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-brand-charcoal transition-all hover:bg-brand-mist hover:shadow-xl hover:shadow-white/10"
+              >
+                Get in touch
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </Link>
+              <Link
+                href="/solutions"
+                className="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition-all hover:border-white/50 hover:bg-white/10"
+              >
+                Explore solutions
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FOOTER ───────────────────────────────────────────────── */}
+      <footer className="bg-brand-charcoal text-white/60">
+        <div className="mx-auto max-w-6xl px-6 py-14 lg:px-8">
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
+            <div className="col-span-2 sm:col-span-1">
+              <div className="flex items-center gap-3">
+                <HtmMark size={32} />
+                <div className="flex items-baseline">
+                  <span
+                    className="text-lg font-extrabold leading-none text-white"
+                    style={{ letterSpacing: '-0.04em' }}
+                  >
+                    HTM
+                  </span>
+                  <span className="ml-1.5 text-lg font-light leading-none text-white/70">Healthcare</span>
                 </div>
               </div>
+              <p className="mt-5 max-w-xs text-sm leading-relaxed">
+                Powering better healthcare through AI-enabled software and expert maintenance of medical imaging equipment.
+              </p>
+            </div>
+
+            <div>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/40">
+                Solutions
+              </div>
+              <ul className="mt-4 space-y-2 text-sm">
+                <li><Link href="/solutions#hos" className="hover:text-white">hOS Platform</Link></li>
+                <li><Link href="/solutions#engineering" className="hover:text-white">Engineering Services</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/40">
+                Company
+              </div>
+              <ul className="mt-4 space-y-2 text-sm">
+                <li><Link href="/about" className="hover:text-white">About</Link></li>
+                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+                <li><Link href="/#why" className="hover:text-white">Why HTM</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/40">
+                Compliance
+              </div>
+              <ul className="mt-4 space-y-2 text-sm">
+                <li>HIPAA</li>
+                <li>SOC 2</li>
+                <li>ISO 13485</li>
+              </ul>
             </div>
           </div>
-        </div>
-      </div>
 
-
-
-      <div className="py-16 px-4 bg-gray-50">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold text-slate-900 mb-3">Origin story</h2>
-          <p className="text-gray-600 font-bold mb-8 max-w-2xl">
-            Workflow was born from the pain we had in organizing incredible events.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-slate-900 text-white rounded-2xl p-6">
-              <h4 className="font-bold mb-2">September 2024</h4>
-              <p className="text-sm">Aha moment leading to the ideation of Workflow.</p>
-            </div>
-
-            <div className="bg-slate-900 text-white rounded-2xl p-6">
-              <h4 className="font-bold mb-2">February 2025</h4>
-              <p className="text-sm">
-                Workflow and its founder graduate from the Pwani Innovation Challenge, a
-                groundbreaking initiative of Swahilipot Hub Foundation, supported by the Ministry
-                of Investments, Trade and Industry, the World Bank Group, Spineberg Limited, and
-                E4Impact Foundation under the KIEP SKIES Initiative.
-              </p>
-            </div>
-
-            <div className="bg-slate-900 text-white rounded-2xl p-6">
-              <h4 className="font-bold mb-2">April 2026</h4>
-              <p className="text-sm">Beta testing of the evolved version of Workflow begins.</p>
-            </div>
+          <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs sm:flex-row sm:items-center">
+            <p>&copy; {new Date().getFullYear()} HTM Healthcare. All rights reserved.</p>
+            <p className="tracking-[0.25em] uppercase text-white/30">Powering Better Healthcare</p>
           </div>
-
-          <div className="space-y-6 text-gray-700 max-w-3xl">
-            <div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
-                2024: The year that changed everything
-              </h3>
-              <p>
-                A chip company called Nvidia quietly became the richest business on the planet
-                because the world had finally woken up to the power of artificial intelligence.
-                Technology was advancing at breakneck speed. Artificial intelligence was
-                transforming industries.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Change was everywhere.</h3>
-              <p>Except at the event check-in desk.</p>
-              <p>
-                As event organizers, we were still relying on paper-based participant lists to
-                check in attendees. It slowed everything down. Participant lists got lost. A
-                simple name, phone number, or email could become a mystery thanks to someone&apos;s
-                unreadable handwriting. And after every event, hours were spent manually entering
-                data that should have already existed digitally.
-              </p>
-              <p>So we asked ourselves a simple question.</p>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
-                Isn&apos;t there a better way of checking in participants?
-              </h3>
-              <p>
-                This question sparked the idea of Workflow - a simple mobile app to digitally
-                check in participants at events by replacing the paper-based participant list.
-              </p>
-              <p className="mt-3">
-                No lost lists.
-                <br />
-                No unreadable handwriting.
-                <br />
-                No guessing games.
-                <br />
-                Just real checks-in and real-time data.
-              </p>
-              <p className="mt-3">
-                In the process of solving the check-in problem, we discovered something bigger.
-                Events did not just have a check-in problem.
-              </p>
-            </div>
-
-            <div>
-              <p>
-                There was a complete infrastructure gap. The creation, the sharing, the
-                discovering, the showing up. Every step required different tools - or worse,
-                manual work.
-              </p>
-              <p className="mt-3">So Workflow evolved.</p>
-            </div>
-
-            <div>
-              <p>
-                What started as a simple check-in tool became a full events platform that takes
-                you from creating an event to sharing it, getting it discovered, and checking
-                participants in - all in one place.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
-                The world changed in 2024 and continues to change. Workflow was built to change
-                with it.
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="py-16 px-4 flex flex-col items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-slate-900 mb-6">Host something incredible?</h2>
-          <Link
-            href="/login"
-            className="inline-flex bg-slate-900 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-slate-800 transition-colors"
-          >
-            Create Event
-          </Link>
-        </div>
-      </div>
-
-      <footer id="about" className="bg-slate-900 text-gray-400 py-8 mt-auto">
-        <div className="max-w-6xl mx-auto px-6 text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} Workflow. All rights reserved.</p>
         </div>
       </footer>
-    </>
+    </div>
   )
 }

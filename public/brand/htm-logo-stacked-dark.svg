@@ -1,0 +1,12 @@
+<svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="320" fill="#0E1117"></rect>
+  <g transform="translate(124,32)">
+  <rect x="4" y="4" width="26" height="26" rx="13" fill="#F24E4E"></rect>
+  <rect x="42" y="4" width="26" height="26" rx="13" fill="#FF9F1C"></rect>
+  <rect x="4" y="32" width="64" height="18" rx="8" fill="#7B5CF0"></rect>
+  <rect x="4" y="52" width="26" height="26" rx="13" fill="#00BFA5"></rect>
+  <rect x="42" y="52" width="26" height="26" rx="13" fill="#1FB6FF"></rect>
+</g>
+  <text x="160" y="212" text-anchor="middle" font-family="Outfit,sans-serif" font-weight="800" font-size="34" letter-spacing="-1" fill="#FFFFFF">HTM</text>
+  <text x="160" y="252" text-anchor="middle" font-family="Outfit,sans-serif" font-weight="300" font-size="34" fill="#FFFFFF" fill-opacity="0.72">Healthcare</text>
+</svg>
